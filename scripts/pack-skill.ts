@@ -1,7 +1,8 @@
 /**
  * Zips skills/wixzel-ui into dist/wixzel-ui-skill.zip, the file people upload
  * to Claude or unzip into ~/.claude/skills, and copies it into the site so
- * ui.wixzel.com serves the same file the GitHub release carries.
+ * ui.wixzel.com serves the same file the GitHub release carries, and
+ * SKILL.md beside it.
  *
  * The zip holds one folder, wixzel-ui/, with SKILL.md at its top.
  */
@@ -17,5 +18,7 @@ mkdirSync(dirname(zip), { recursive: true });
 rmSync(zip, { force: true });
 execFileSync("zip", ["-rqX", zip, "wixzel-ui", "-x", "*.DS_Store"], { cwd: join(root, "skills") });
 copyFileSync(zip, join(root, "apps", "site", "public", "wixzel-ui-skill.zip"));
+// SKILL.md on its own too, for people who only want the main file.
+copyFileSync(join(root, "skills", "wixzel-ui", "SKILL.md"), join(root, "apps", "site", "public", "SKILL.md"));
 
 console.log(`skill: wrote ${zip.slice(root.length + 1)}`);

@@ -4,6 +4,7 @@ import { GITHUB } from "./header";
 import { Logo } from "./logo";
 
 const docs = [
+  { label: "Components", href: "/components/" },
   { label: "React", href: "/docs/react/" },
   { label: "Flutter", href: "/docs/flutter/" },
   { label: "Vue, Svelte, HTML", href: "/docs/other-stacks/" },

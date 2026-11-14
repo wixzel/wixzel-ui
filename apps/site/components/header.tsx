@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button, SiteHeader, SiteNavLink, ThemeMenu } from "wixzel-ui";
-import { BookOpenIcon, DeviceMobileIcon, GithubLogoIcon, HouseIcon, PaletteIcon, SparkleIcon } from "wixzel-ui/icons";
+import { BookOpenIcon, CubeIcon, DeviceMobileIcon, GithubLogoIcon, HouseIcon, PaletteIcon, SparkleIcon } from "wixzel-ui/icons";
 import { Logo } from "./logo";
 
 export const GITHUB = "https://github.com/wixzel/wixzel-ui";
 
 const nav = [
   { href: "/", label: "Home", icon: <HouseIcon />, match: (p: string) => p === "/" },
+  { href: "/components/", label: "Components", icon: <CubeIcon />, match: (p: string) => p.startsWith("/components") },
   { href: "/docs/react/", label: "React", icon: <BookOpenIcon />, match: (p: string) => p.startsWith("/docs/react") || p.startsWith("/docs/other-stacks") },
   { href: "/docs/flutter/", label: "Flutter", icon: <DeviceMobileIcon />, match: (p: string) => p.startsWith("/docs/flutter") },
   { href: "/docs/design-language/", label: "Design language", icon: <PaletteIcon />, match: (p: string) => p.startsWith("/docs/design-language") || p.startsWith("/docs/checklist") },

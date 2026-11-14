@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeader } from "wixzel-ui";
+import { Button, PageHeader } from "wixzel-ui";
+import { DownloadSimpleIcon, FileTextIcon } from "wixzel-ui/icons";
 import { Markdown } from "@/components/markdown";
 import { SkillInstall } from "@/components/skill-install";
 import { docs } from "@/lib/docs";
@@ -28,6 +29,22 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
       <PageHeader
         title={doc.title}
         description={doc.slug === "skill" ? "Install it once, then ask Claude to convert any project to Wixzel UI." : undefined}
+        actions={
+          doc.slug === "skill" && (
+            <>
+              <Button asChild iconStart={<FileTextIcon />}>
+                <a href="/SKILL.md" download>
+                  Download SKILL.md
+                </a>
+              </Button>
+              <Button asChild variant="primary" iconStart={<DownloadSimpleIcon />}>
+                <a href="/wixzel-ui-skill.zip" download>
+                  Download .zip
+                </a>
+              </Button>
+            </>
+          )
+        }
       />
       {doc.slug === "skill" && (
         <>

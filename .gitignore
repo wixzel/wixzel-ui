@@ -11,4 +11,5 @@ next-env.d.ts
 out
 dist/
 apps/site/public/wixzel-ui-skill.zip
+apps/site/public/SKILL.md
 *.tgz

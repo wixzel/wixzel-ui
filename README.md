@@ -10,6 +10,10 @@ text pair passing WCAG AA.
 
 **Docs, live components and a theme builder: [ui.wixzel.com](https://ui.wixzel.com)**
 
+[![Wixzel UI components: buttons, fields, switches, tabs, chips, a stat card, badges, an alert, a transcript and avatars](.github/assets/components.png)](https://ui.wixzel.com/components/)
+
+Every component, live, with its code: [ui.wixzel.com/components](https://ui.wixzel.com/components/)
+
 | Package | What it is | Install |
 |---|---|---|
 | [`wixzel-ui`](packages/react) | React 19 + Tailwind v4 components on Radix, the tokens (CSS variables, Tailwind theme, JSON) and the seed CLI | `npm i wixzel-ui` |
@@ -43,6 +47,8 @@ unzip wixzel-ui-skill.zip -d ~/.claude/skills
 Then, in your project: *"Convert this project to Wixzel UI. Our brand colour is #E4572E."*
 
 ## Your colour
+
+[![The theme builder: one seed colour tints a whole screen](.github/assets/theme-builder.png)](https://ui.wixzel.com/#theme)
 
 Web:
 
