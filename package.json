@@ -1,0 +1,18 @@
+{
+  "name": "wixzel-ui-monorepo",
+  "private": true,
+  "type": "module",
+  "description": "Wixzel UI: the design system behind every Wixzel product, for React and Flutter.",
+  "packageManager": "pnpm@10.26.2",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build": "pnpm --filter @wixzel/tokens build && pnpm --filter wixzel-ui build",
+    "dev": "pnpm --filter @wixzel/tokens build && pnpm --filter wixzel-ui dev",
+    "check": "pnpm --filter @wixzel/tokens check && pnpm -r typecheck",
+    "site": "pnpm build && pnpm --filter site dev",
+    "site:build": "pnpm build && pnpm --filter site build",
+    "skill": "node scripts/pack-skill.ts"
+  }
+}

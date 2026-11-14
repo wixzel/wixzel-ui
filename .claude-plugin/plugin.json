@@ -1,0 +1,10 @@
+{
+  "name": "wixzel-ui",
+  "description": "Convert any React, Next.js, Vue, Svelte, HTML or Flutter project to the Wixzel UI design language.",
+  "version": "0.1.0",
+  "author": { "name": "Wixzel", "url": "https://wixzel.com" },
+  "homepage": "https://ui.wixzel.com",
+  "repository": "https://github.com/wixzel/wixzel-ui",
+  "license": "MIT",
+  "keywords": ["design-system", "ui", "react", "flutter", "tailwindcss"]
+}

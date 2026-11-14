@@ -1,0 +1,19 @@
+@import "tailwindcss";
+/* Wixzel UI, the master brand: ink on warm paper, set by data-product="wixzel"
+   on <html>. The theme builder's preview carries its own colour inline. */
+@import "wixzel-ui/styles.css";
+@source "./";
+@source "../components";
+
+@layer base {
+  /* An island inherits `color` computed from the outer scope's ink; recompute it. */
+  [data-theme]:not(:root),
+  [data-product]:not(:root),
+  [data-brand-preview] { color: var(--wx-color-fg); }
+
+  /* A bare `border` is the token's hairline, not currentColor. */
+  * { border-color: var(--wx-color-border); }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+}

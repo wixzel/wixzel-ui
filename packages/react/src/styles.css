@@ -1,0 +1,50 @@
+/* Wixzel UI. In your app's CSS:
+     @import "tailwindcss";
+     @import "wixzel-ui/styles.css";
+   This brings in the tokens and tells Tailwind to generate the classes the
+   components use. */
+@import "@wixzel/tokens/tailwind.css";
+@source "./";
+
+@theme inline {
+  --animate-wx-drawer-in-right: wx-drawer-in-right var(--wx-duration-slow) var(--wx-ease-out);
+  --animate-wx-drawer-out-right: wx-drawer-out-right var(--wx-duration-base) var(--wx-ease-standard);
+  --animate-wx-drawer-in-left: wx-drawer-in-left var(--wx-duration-slow) var(--wx-ease-out);
+  --animate-wx-drawer-out-left: wx-drawer-out-left var(--wx-duration-base) var(--wx-ease-standard);
+  --animate-wx-drawer-in-bottom: wx-drawer-in-bottom var(--wx-duration-slow) var(--wx-ease-out);
+  --animate-wx-drawer-out-bottom: wx-drawer-out-bottom var(--wx-duration-base) var(--wx-ease-standard);
+  --animate-wx-expand: wx-expand var(--wx-duration-move) var(--wx-ease-move);
+  --animate-wx-collapse: wx-collapse var(--wx-duration-base) var(--wx-ease-standard);
+  --animate-wx-caret: wx-caret 1s steps(1) infinite;
+}
+
+@keyframes wx-drawer-in-right { from { transform: translateX(calc(100% + 16px)); } }
+@keyframes wx-drawer-out-right { to { transform: translateX(calc(100% + 16px)); } }
+@keyframes wx-drawer-in-left { from { transform: translateX(calc(-100% - 16px)); } }
+@keyframes wx-drawer-out-left { to { transform: translateX(calc(-100% - 16px)); } }
+@keyframes wx-drawer-in-bottom { from { transform: translateY(calc(100% + 16px)); } }
+@keyframes wx-drawer-out-bottom { to { transform: translateY(calc(100% + 16px)); } }
+@keyframes wx-expand { from { height: 0; opacity: 0; } to { height: var(--radix-accordion-content-height); } }
+@keyframes wx-collapse { from { height: var(--radix-accordion-content-height); } to { height: 0; opacity: 0; } }
+/* The streaming caret blinks hard, on and off, like a terminal. */
+@keyframes wx-caret { 50% { opacity: 0; } }
+
+/* ------------------------------------------------------------ Overlay plane
+
+   The page's planes — bg, bg-subtle, bg-muted, card — are steps away from the
+   page. An overlay floats above it on surface-overlay, which on a dark theme is
+   LIGHTER than the page, so a field or a footer band drawn from the page's
+   planes steps the wrong way and lands darker than the panel it sits on: the
+   dialog footer read as a near-black strip and a filled field all but vanished
+   against the panel.
+
+   Inside an overlay the same names step from the overlay instead, mixing toward
+   the ink. That is correct in both themes — toward dark on a light panel, toward
+   light on a dark one — and it fixes every component placed in an overlay at
+   once rather than each one being told about dialogs. */
+.wx-plane-overlay {
+  --wx-color-bg: var(--wx-color-surface-overlay);
+  --wx-color-card: color-mix(in oklab, var(--wx-color-surface-overlay), var(--wx-color-fg) 4%);
+  --wx-color-bg-subtle: color-mix(in oklab, var(--wx-color-surface-overlay), var(--wx-color-fg) 6%);
+  --wx-color-bg-muted: color-mix(in oklab, var(--wx-color-surface-overlay), var(--wx-color-fg) 10%);
+}

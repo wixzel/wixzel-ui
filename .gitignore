@@ -1,0 +1,14 @@
+node_modules
+dist
+.next
+out
+*.tsbuildinfo
+.DS_Store
+next-env.d.ts
+
+# Local tooling and build output
+.claude/
+out
+dist/
+apps/site/public/wixzel-ui-skill.zip
+*.tgz

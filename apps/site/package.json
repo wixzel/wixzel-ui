@@ -1,0 +1,27 @@
+{
+  "name": "site",
+  "private": true,
+  "type": "module",
+  "description": "ui.wixzel.com: the docs, the live components and the Claude skill.",
+  "scripts": {
+    "dev": "node ../../scripts/pack-skill.ts && next dev --port 3010",
+    "build": "node ../../scripts/pack-skill.ts && next build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.1.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "wixzel-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^22.19.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "~5.9.3"
+  }
+}

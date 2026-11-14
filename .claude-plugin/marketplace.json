@@ -1,0 +1,15 @@
+{
+  "name": "wixzel",
+  "owner": {
+    "name": "Wixzel",
+    "url": "https://wixzel.com"
+  },
+  "description": "Wixzel's open-source plugins: Wixzel UI, the design system behind every Wixzel product.",
+  "plugins": [
+    {
+      "name": "wixzel-ui",
+      "source": "./",
+      "description": "Convert any React, Next.js, Vue, Svelte, HTML or Flutter project to the Wixzel UI design language."
+    }
+  ]
+}

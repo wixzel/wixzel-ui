@@ -1,0 +1,22 @@
+# A tag like v0.2.0 makes a GitHub release carrying the Claude skill zip.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: mkdir -p apps/site/public && node scripts/pack-skill.ts
+      - run: gh release create "$GITHUB_REF_NAME" dist/wixzel-ui-skill.zip --generate-notes --title "$GITHUB_REF_NAME"
+        env:
+          GH_TOKEN: ${{ github.token }}

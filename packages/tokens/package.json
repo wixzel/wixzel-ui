@@ -1,0 +1,38 @@
+{
+  "name": "@wixzel/tokens",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Wixzel UI design tokens. Internal: published inside wixzel-ui.",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.css": "./dist/tailwind.css",
+    "./tokens.json": "./dist/tokens.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node scripts/build.ts && node scripts/build-dart.ts && tsup src/tokens.ts --format esm --dts --out-dir dist --no-clean --silent && mv dist/tokens.js dist/index.js && mv dist/tokens.d.ts dist/index.d.ts && tsup src/cli.ts --format esm --out-dir dist --no-clean --silent",
+    "check": "node scripts/check.ts && node scripts/build-dart.ts --check",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.3"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wixzel/wixzel-ui.git",
+    "directory": "packages/tokens"
+  }
+}
