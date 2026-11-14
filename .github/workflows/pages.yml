@@ -28,8 +28,10 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Build first: the React package type-checks against the tokens' built types.
+      - run: pnpm build
       - run: pnpm check
-      - run: pnpm site:build
+      - run: pnpm --filter site build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/site/out

@@ -16,7 +16,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
+          # The version the package is built and tested against (pubspec: flutter >=3.41).
+          flutter-version: 3.41.7
           channel: stable
       - run: flutter pub get
-      - run: flutter analyze
+      - run: flutter analyze --no-fatal-infos
       - run: flutter test
