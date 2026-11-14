@@ -67,7 +67,17 @@ export function Sparkline({
       </defs>
       <path d={`${line} L${w} ${h} L0 ${h} Z`} fill={`url(#${id})`} />
       <path d={line} fill="none" stroke="currentColor" strokeWidth={1.5} vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
-      {last && <circle cx={last[0]} cy={last[1]} r={2} fill="currentColor" vectorEffect="non-scaling-stroke" className="[transform-box:fill-box]" />}
+      {/* The latest point. The SVG stretches to its box, so a <circle> would turn oval; a
+          zero-length stroke with round caps is drawn in screen pixels and stays round. */}
+      {last && (
+        <path
+          d={`M${last[0].toFixed(2)} ${last[1].toFixed(2)} h0`}
+          stroke="currentColor"
+          strokeWidth={5}
+          strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
+        />
+      )}
     </svg>
   );
 }

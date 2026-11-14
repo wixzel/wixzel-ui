@@ -59,8 +59,9 @@ export function Avatar({ name, src, size = "md", shape = "round", status, classN
     </AvatarPrimitive.Root>
   );
   if (!status) return avatar;
+  // The wrapper takes the avatar's shape, so a ring drawn on it (AvatarGroup) follows the curve.
   return (
-    <span className="relative inline-flex shrink-0">
+    <span className={cn("relative inline-flex shrink-0", shape === "round" ? "rounded-full" : squareCorners[size])}>
       {avatar}
       <span
         role="img"

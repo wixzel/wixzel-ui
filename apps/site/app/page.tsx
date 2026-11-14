@@ -34,7 +34,6 @@ export default function Home() {
         align="center"
         eyebrow={<HeroEyebrow icon={<GithubLogoIcon />}>Open source · MIT</HeroEyebrow>}
         title="Calm screens, crafted components."
-        trail="From one colour."
         description="Wixzel UI is the design system behind every Wixzel product. React and Flutter components, a whole palette from your brand colour, and a Claude skill that converts your project."
         actions={
           <>
