@@ -2,9 +2,9 @@ name: Flutter
 
 on:
   push:
-    paths: ["packages/flutter/**"]
+    paths: ["packages/flutter/**", ".github/workflows/flutter.yml"]
   pull_request:
-    paths: ["packages/flutter/**"]
+    paths: ["packages/flutter/**", ".github/workflows/flutter.yml"]
 
 jobs:
   test:
