@@ -24,7 +24,7 @@ import { ThemeBuilder } from "@/components/theme-builder";
 const sites: Site[] = [
   { id: "voice", name: "Wixzel Voice", url: "https://voice.wixzel.com", aspect: "16 / 10" },
   { id: "intellicall", name: "IntelliCallAI", url: "https://intellicallai.wixzel.com", aspect: "16 / 9" },
-  { id: "feedkraft", name: "Feedkraft", url: "https://feedkraft.wixzel.com", aspect: "16 / 9" },
+  { id: "feedkraft", name: "Feedkraft", url: "https://feedkraft.wixzel.com", aspect: "1280 / 744" },
   { id: "store", name: "Wixzel Store", url: "https://store.wixzel.com", aspect: "16 / 10" },
   { id: "wixzel", name: "Wixzel", url: "https://wixzel.com", aspect: "16 / 10" },
 ];
