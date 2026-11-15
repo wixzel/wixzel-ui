@@ -5,6 +5,7 @@ import { Logo } from "./logo";
 
 const docs = [
   { label: "Components", href: "/components/" },
+  { label: "Facts", href: "/facts/" },
   { label: "React", href: "/docs/react/" },
   { label: "Flutter", href: "/docs/flutter/" },
   { label: "Vue, Svelte, HTML", href: "/docs/other-stacks/" },

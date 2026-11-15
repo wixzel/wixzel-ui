@@ -4,8 +4,8 @@
   "type": "module",
   "description": "ui.wixzel.com: the docs, the live components and the Claude skill.",
   "scripts": {
-    "dev": "node ../../scripts/pack-skill.ts && next dev --port 3010",
-    "build": "node ../../scripts/pack-skill.ts && next build",
+    "dev": "node ../../scripts/pack-skill.ts && node ../../scripts/llms.ts && next dev --port 3010",
+    "build": "node ../../scripts/pack-skill.ts && node ../../scripts/llms.ts && next build",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

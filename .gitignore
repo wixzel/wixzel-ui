@@ -13,3 +13,6 @@ dist/
 apps/site/public/wixzel-ui-skill.zip
 apps/site/public/SKILL.md
 *.tgz
+apps/site/public/llms.txt
+apps/site/public/llms-full.txt
+apps/site/public/docs/

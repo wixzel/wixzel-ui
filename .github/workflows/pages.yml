@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history: the sitemap and structured data date each page by its last commit.
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -32,6 +35,11 @@ jobs:
       - run: pnpm build
       - run: pnpm check
       - run: pnpm --filter site build
+        env:
+          # Search Console and Bing verification. Set them under Settings ›
+          # Secrets and variables › Actions › Variables; unset writes no tag.
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
+          NEXT_PUBLIC_BING_SITE_VERIFICATION: ${{ vars.BING_SITE_VERIFICATION }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/site/out
@@ -45,3 +53,20 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Tell IndexNow (Bing, which ChatGPT search reads, plus Yandex and others)
+  # about every page, so changes are indexed in minutes rather than weeks.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: apps/site/public
+      - name: Ping IndexNow
+        run: |
+          KEY=$(basename "$(ls apps/site/public/*.txt | grep -E '/[0-9a-f]{32}\.txt$')" .txt)
+          URLS=$(curl -fsS https://ui.wixzel.com/sitemap.xml | grep -o '<loc>[^<]*</loc>' | sed 's#</\?loc>##g' | jq -R . | jq -s .)
+          jq -n --arg key "$KEY" --argjson urls "$URLS" \
+            '{host: "ui.wixzel.com", key: $key, keyLocation: "https://ui.wixzel.com/\($key).txt", urlList: $urls}' \
+            | curl -fsS -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' -d @- -o /dev/null -w 'IndexNow: %{http_code}\n'

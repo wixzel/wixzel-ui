@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
 import { PageHeader, SiteContainer, SiteSidebarLayout } from "wixzel-ui";
 import { Gallery, GalleryNav } from "@/components/gallery";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbs, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/components/",
   title: "Components",
-  description: "Every Wixzel UI component, live: buttons, forms, navigation, feedback, overlays, data and more, each with its code.",
-};
+  description:
+    "Every Wixzel UI component, live, with its code: buttons, inputs, selects, tabs, dialogs, toasts, tables, charts, stat cards, avatars and more, for React with Tailwind CSS v4.",
+});
 
 export default function ComponentsPage() {
   return (
     <SiteContainer className="py-10 sm:py-14">
+      <JsonLd data={breadcrumbs([{ name: "Wixzel UI", path: "/" }, { name: "Components", path: "/components/" }])} />
       <SiteSidebarLayout sidebar={<GalleryNav />}>
         <div className="min-w-0">
           <PageHeader

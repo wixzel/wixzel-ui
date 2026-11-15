@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button, Card, CtaBand, Feature, FeatureGrid, Hero, HeroEyebrow, SiteContainer, SiteSection } from "wixzel-ui";
 import {
@@ -14,10 +15,16 @@ import {
   StackIcon,
 } from "wixzel-ui/icons";
 import { CodeBlock } from "@/components/code-block";
+import { Faq } from "@/components/faq";
+import { JsonLd } from "@/components/json-ld";
 import { GITHUB } from "@/components/header";
 import { Showcase } from "@/components/showcase";
 import { SkillInstall } from "@/components/skill-install";
 import { ThemeBuilder } from "@/components/theme-builder";
+import { faqs } from "@/lib/facts";
+import { faqPage, pageMetadata, SITE_DESCRIPTION, sourceCode } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({ path: "/", description: SITE_DESCRIPTION });
 
 const platforms = [
   { icon: <CodeIcon />, title: "React", body: "React 19 and Tailwind v4, on Radix primitives.", install: "npm i wixzel-ui", href: "/docs/react/", link: "React guide" },
@@ -30,6 +37,7 @@ const code = "[&_pre]:rounded-lg [&_pre]:bg-bg [&_pre]:p-3 [&_pre]:font-mono [&_
 export default function Home() {
   return (
     <>
+      <JsonLd data={[sourceCode, faqPage(faqs)]} />
       <Hero
         align="center"
         eyebrow={<HeroEyebrow icon={<GithubLogoIcon />}>Open source · MIT</HeroEyebrow>}
@@ -123,6 +131,15 @@ export default function Home() {
         <div className="mt-8">
           <Button asChild variant="ghost" iconEnd={<ArrowRightIcon />}>
             <Link href="/docs/design-language/">The full design language</Link>
+          </Button>
+        </div>
+      </SiteSection>
+
+      <SiteSection id="faq" tone="subtle" title="Questions" description="Short answers about Wixzel UI. More on the facts page.">
+        <Faq />
+        <div className="mt-8">
+          <Button asChild variant="ghost" iconEnd={<ArrowRightIcon />}>
+            <Link href="/facts/">Wixzel UI facts</Link>
           </Button>
         </div>
       </SiteSection>
