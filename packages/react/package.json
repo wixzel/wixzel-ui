@@ -1,6 +1,6 @@
 {
   "name": "wixzel-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Wixzel UI for React: calm, tonal, crafted components, and a whole palette from one seed colour.",
   "type": "module",
   "sideEffects": [
@@ -32,7 +32,8 @@
     "wixzel-ui": "./dist/cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "icons": "node scripts/icons.ts",
