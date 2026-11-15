@@ -13,21 +13,11 @@ import {
   SquaresFourIcon,
   StackIcon,
 } from "wixzel-ui/icons";
-import { BeforeAfter, type Site } from "@/components/before-after";
 import { CodeBlock } from "@/components/code-block";
 import { GITHUB } from "@/components/header";
 import { Showcase } from "@/components/showcase";
 import { SkillInstall } from "@/components/skill-install";
 import { ThemeBuilder } from "@/components/theme-builder";
-
-// Wixzel's own sites, before and after Wixzel UI.
-const sites: Site[] = [
-  { id: "voice", name: "Wixzel Voice", url: "https://voice.wixzel.com", aspect: "16 / 10" },
-  { id: "intellicall", name: "IntelliCallAI", url: "https://intellicallai.wixzel.com", aspect: "16 / 9" },
-  { id: "feedkraft", name: "Feedkraft", url: "https://feedkraft.wixzel.com", aspect: "1280 / 744" },
-  { id: "store", name: "Wixzel Store", url: "https://store.wixzel.com", aspect: "16 / 10" },
-  { id: "wixzel", name: "Wixzel", url: "https://wixzel.com", aspect: "16 / 10" },
-];
 
 const platforms = [
   { icon: <CodeIcon />, title: "React", body: "React 19 and Tailwind v4, on Radix primitives.", install: "npm i wixzel-ui", href: "/docs/react/", link: "React guide" },
@@ -56,15 +46,6 @@ export default function Home() {
           </>
         }
       />
-
-      <SiteSection
-        id="before-after"
-        tone="subtle"
-        title="Our own products, before and after"
-        description="Drag across to compare."
-      >
-        <BeforeAfter sites={sites} />
-      </SiteSection>
 
       <SiteSection
         id="components"
