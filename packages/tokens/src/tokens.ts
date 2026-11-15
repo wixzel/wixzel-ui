@@ -134,13 +134,32 @@ function readable(seed: { c: number; h: number }, from: number, step: number, gr
   return step < 0 ? "#000000" : "#FFFFFF";
 }
 
+/**
+ * Fills lighter than this take a dark label (lime, sky, mint); darker ones take
+ * a light label. WCAG 2's formula alone would put dark text on mid-tone fills
+ * like teal, orange and amber, where it passes on paper and reads poorly.
+ */
+const LIGHT_LABEL_BELOW = 0.7;
+
 function deriveAccent(spec: ProductSpec, n: Record<NeutralRole, Pair>): Accent {
   const s = toOklch(spec.seed);
+  const light = oklch(0.985, 0.01, s.h);
+  const deep = oklch(0.17, 0.02, s.h);
+  // A fill that takes a light label is darkened just enough for it to reach 4.5:1.
+  const fillFor = (fill: string): string => {
+    const o = toOklch(fill);
+    if (o.l >= LIGHT_LABEL_BELOW) return fill;
+    let out = fill;
+    for (let l = o.l; contrast(light, out) < 4.5 && l > 0; ) {
+      l -= 0.01;
+      out = oklch(l, o.c, o.h);
+    }
+    return out;
+  };
   const dark = s.l < 0.45 ? oklch(0.62, s.c, s.h) : spec.seed;
-  const accent: Pair = [spec.seed, dark];
+  const accent: Pair = [fillFor(spec.seed), fillFor(dark)];
   const onFill = (fill: string): string => {
-    const light = oklch(0.985, 0.01, s.h);
-    const deep = oklch(0.17, 0.02, s.h);
+    if (toOklch(fill).l < LIGHT_LABEL_BELOW) return light;
     return contrast(light, fill) >= contrast(deep, fill) ? light : deep;
   };
   const accentFg: Pair = [onFill(accent[0]), onFill(accent[1])];

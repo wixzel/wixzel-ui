@@ -99,6 +99,11 @@ const _ramp = <String, List<List<double>>>{
   'fgDisabled': [[0.74, 0.03], [0.46, 0.03]],
 };
 
+/// Fills lighter than this take a dark label (lime, sky, mint); darker ones take
+/// a light label. WCAG 2's formula alone would put dark text on mid-tone fills
+/// like teal, orange and amber, where it passes on paper and reads poorly.
+const _lightLabelBelow = 0.7;
+
 Color _readable(_Lch seed, double from, double step, List<Color> grounds, double min) {
   for (var l = from; l >= 0 && l <= 1; l += step) {
     final c = _oklch(l, seed.c, seed.h);
@@ -137,10 +142,23 @@ WxProductTokens wxDeriveProduct(Color seed, {double tint = 0.45, double? hue, do
     _oklch(0.06, 0.01 * strength, h).withAlpha(0xA0),
   ];
 
-  final accent = [opaque, s.l < 0.45 ? _oklch(0.62, s.c, s.h) : opaque];
+  final light = _oklch(0.985, 0.01, s.h);
+  final deep = _oklch(0.17, 0.02, s.h);
+  // A fill that takes a light label is darkened just enough for it to reach 4.5:1.
+  Color fillFor(Color fill) {
+    final o = _toOklch(fill);
+    if (o.l >= _lightLabelBelow) return fill;
+    var out = fill;
+    for (var l = o.l; _contrast(light, out) < 4.5 && l > 0;) {
+      l -= 0.01;
+      out = _oklch(l, o.c, o.h);
+    }
+    return out;
+  }
+
+  final accent = [fillFor(opaque), fillFor(s.l < 0.45 ? _oklch(0.62, s.c, s.h) : opaque)];
   Color onFill(Color fill) {
-    final light = _oklch(0.985, 0.01, s.h);
-    final deep = _oklch(0.17, 0.02, s.h);
+    if (_toOklch(fill).l < _lightLabelBelow) return light;
     return _contrast(light, fill) >= _contrast(deep, fill) ? light : deep;
   }
 
