@@ -37,7 +37,7 @@ export function Header() {
       ))}
       actions={
         <>
-          <ThemeMenu options={["light", "dark"]} />
+          <ThemeMenu />
           <Button asChild variant="secondary" size="sm" iconStart={<GithubLogoIcon />} className="hidden md:inline-flex">
             <a href={GITHUB}>GitHub</a>
           </Button>

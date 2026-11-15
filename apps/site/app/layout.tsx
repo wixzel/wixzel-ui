@@ -8,7 +8,12 @@ import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
 
-export const viewport: Viewport = { themeColor: "#FCFCFB" };
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FCFCFB" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F0E0C" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ui.wixzel.com"),
@@ -19,9 +24,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Light first. themeScript swaps in a saved dark choice before first paint.
+  // Follows the system until someone picks a theme; themeScript applies that choice before first paint.
   return (
-    <html lang="en" data-product="wixzel" data-theme="light" className={manrope.variable} suppressHydrationWarning>
+    <html lang="en" data-product="wixzel" className={manrope.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

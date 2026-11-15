@@ -23,7 +23,7 @@ export function Footer() {
   return (
     <SiteFooter
       logo={<Logo className="h-7" />}
-      preferences={<ThemeMenu align="start" options={["light", "dark"]} />}
+      preferences={<ThemeMenu align="start" />}
       legal={
         <a href={`${GITHUB}/blob/main/LICENSE`} className="rounded-sm wx-focus transition-colors duration-(--wx-duration-fast) hover:text-fg">
           MIT License

@@ -12,6 +12,18 @@ export interface Site {
   aspect: string;
 }
 
+/** One side of the comparison, in light and dark; the site's theme picks which shows. */
+function Shot({ site, side, alt, clip }: { site: Site; side: "before" | "after"; alt: string; clip?: string }) {
+  const style = clip ? { clipPath: clip } : undefined;
+  const base = "absolute inset-0 size-full object-cover object-top";
+  return (
+    <>
+      <img src={`/showcase/${site.id}-${side}.jpg`} alt={alt} className={`${base} dark:hidden`} style={style} draggable={false} />
+      <img src={`/showcase/${site.id}-${side}-dark.jpg`} alt="" aria-hidden className={`${base} hidden dark:block`} style={style} draggable={false} loading="lazy" />
+    </>
+  );
+}
+
 /**
  * One site before and after Wixzel UI. The "after" sits underneath; the
  * "before" is clipped on top up to the handle. A range input covers the whole
@@ -22,19 +34,8 @@ function Compare({ site }: { site: Site }) {
   return (
     <figure className="flex flex-col gap-3">
       <div className="relative select-none overflow-hidden rounded-xl bg-card shadow-raised" style={{ aspectRatio: site.aspect }}>
-        <img
-          src={`/showcase/${site.id}-after.jpg`}
-          alt={`${site.name} on Wixzel UI`}
-          className="absolute inset-0 size-full object-cover object-top"
-          draggable={false}
-        />
-        <img
-          src={`/showcase/${site.id}-before.jpg`}
-          alt={`${site.name} before Wixzel UI`}
-          className="absolute inset-0 size-full object-cover object-top"
-          style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
-          draggable={false}
-        />
+        <Shot site={site} side="after" alt={`${site.name} on Wixzel UI`} />
+        <Shot site={site} side="before" alt={`${site.name} before Wixzel UI`} clip={`inset(0 ${100 - pos}% 0 0)`} />
 
         <Badge appearance="solid" className="pointer-events-none absolute start-3 top-3" style={{ opacity: pos > 12 ? 1 : 0 }}>
           Before
